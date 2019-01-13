@@ -1,6 +1,7 @@
 package viereckbestimmung;
 
 
+import java.io.IOException;
 import java.util.Scanner;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
@@ -8,8 +9,17 @@ public class Viereckbestimmung {
 
     public static final double EPS = 1E-5;
 
-    public static void main(String[] args) {
-        System.out.println(liesPunkt());
+    public static void main(String[] args) throws IOException {
+
+        Punkt[] viereck = new Punkt[4];
+
+        System.out.println("Geben Sie die vier Punkte eines Vierecks gegen den Uhrzeigersinn ein:");
+
+        for (int i = 0; i < 4; i++) {
+            System.out.println("Punkt " + (i + 1) + " eingeben:");
+            viereck[i] = liesPunkt();
+        }
+
     }
 
     static boolean isViereck(Punkt[] p) {
@@ -85,26 +95,38 @@ public class Viereckbestimmung {
         return (isEqual(EPS, a, d) && isEqual(EPS, b, c)) || (isEqual(EPS, a, b) && isEqual(EPS, c, d));
     }
 
-    static Punkt liesPunkt() {
+    static Punkt liesPunkt() throws IOException {
 
-        Scanner scanner = new Scanner(System.in);
         Punkt punkt = new Punkt();
+        Scanner scanner = new Scanner(System.in);
+        boolean fehler;
 
         do {
+            fehler = false;
             System.out.print("\tx-Koordinate eigeben --> ");
-            if (!scanner.hasNextDouble())
+            if (scanner.hasNextDouble()) {
+                punkt.x = scanner.nextDouble();
+            } else {
                 System.out.println("Es muss ein Doublewert eingegeben werden!");
-        } while (!scanner.hasNextDouble());
+                scanner.next();
+                fehler = true;
+            }
+        } while (fehler);
 
-        punkt.x = scanner.nextDouble();
 
         do {
+            fehler = false;
             System.out.print("\ty-Koordinate eigeben --> ");
-            if (!scanner.hasNextDouble())
+            if (scanner.hasNextDouble()) {
+                punkt.y = scanner.nextDouble();
+            } else {
                 System.out.println("Es muss ein Doublewert eingegeben werden!");
-        } while (!scanner.hasNextDouble());
+                scanner.next();
+                fehler = true;
+            }
+        } while (fehler);
 
-        punkt.y = scanner.nextDouble();
+
 
         return punkt;
     }
