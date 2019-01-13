@@ -13,31 +13,34 @@ import static org.junit.Assert.*;
  *
  * @author chris
  */
+@SuppressWarnings("WeakerAccess")
 public class ViereckbestimmungTest {
 
-    private Punkt[] quadrat1 = {new Punkt(0, 0), new Punkt(0, 1), new Punkt(1, 1), new Punkt(1, 0)};
-    private Punkt[] quadrat2 = {new Punkt(1, 1), new Punkt(-1, 3), new Punkt(1, 5), new Punkt(3, 3)};
-    private Punkt[] rechteck1 = {new Punkt(0, 0), new Punkt(0, 2), new Punkt(1, 2), new Punkt(1, 0)};
-    private Punkt[] rechteck2 = {new Punkt(1, 1), new Punkt(-2, 4), new Punkt(0, 6), new Punkt(3, 3)};
-    private Punkt[] pg1 = {new Punkt(1, 1), new Punkt(4, 4), new Punkt(4, -2), new Punkt(1, -5)};
-    private Punkt[] pg2 = {new Punkt(2, 1), new Punkt(8, 2), new Punkt(9, -1), new Punkt(3, -2)};
-    private Punkt[] raute1 = {new Punkt(2, 1), new Punkt(5, 5), new Punkt(8, 1), new Punkt(5, -3)};
-    private Punkt[] raute2 = {new Punkt(3, 3), new Punkt(6, 7), new Punkt(9, 3), new Punkt(6, -1)};
-    private Punkt[] deltoid1 = {new Punkt(3, 8), new Punkt(5, 8), new Punkt(9, 2), new Punkt(3, 6)};
-    private Punkt[] deltoid2 = {new Punkt(3, 2), new Punkt(1, 7), new Punkt(6, 5), new Punkt(6, 2)};
-    private Punkt[] allg1 = {new Punkt(2, 3), new Punkt(3, 5), new Punkt(1, 6), new Punkt(4, 3)};
-    private Punkt[] allg2 = {new Punkt(3, 4), new Punkt(1, 5), new Punkt(3, 9), new Punkt(4, 3)};
-    private Punkt[] punkt = {new Punkt(0, 0), new Punkt(0, 0), new Punkt(0, 0), new Punkt(0, 0)};
-    private Punkt[] strich = {new Punkt(0, 0), new Punkt(0, 0), new Punkt(2, 2), new Punkt(2, 2)};
-    private Punkt[] dreieck = {new Punkt(0, 0), new Punkt(0, 0), new Punkt(2, 2), new Punkt(2, 0)};
-    private Punkt[][] arr = {quadrat1, quadrat2, rechteck1, rechteck2, pg1, pg2, raute1, raute2, deltoid1, deltoid2, allg1, allg2};
+    Punkt[] quadrat1 = {new Punkt(0, 0), new Punkt(0, 1), new Punkt(1, 1), new Punkt(1, 0)};
+    Punkt[] quadrat2 = {new Punkt(1, 1), new Punkt(-1, 3), new Punkt(1, 5), new Punkt(3, 3)};
+    Punkt[] rechteck1 = {new Punkt(0, 0), new Punkt(0, 2), new Punkt(1, 2), new Punkt(1, 0)};
+    Punkt[] rechteck2 = {new Punkt(1, 1), new Punkt(-2, 4), new Punkt(0, 6), new Punkt(3, 3)};
+    Punkt[] pg1 = {new Punkt(1, 1), new Punkt(4, 4), new Punkt(4, -2), new Punkt(1, -5)};
+    Punkt[] pg2 = {new Punkt(2, 1), new Punkt(8, 2), new Punkt(9, -1), new Punkt(3, -2)};
+    Punkt[] raute1 = {new Punkt(2, 1), new Punkt(5, 5), new Punkt(8, 1), new Punkt(5, -3)};
+    Punkt[] raute2 = {new Punkt(3, 3), new Punkt(6, 7), new Punkt(9, 3), new Punkt(6, -1)};
+    Punkt[] deltoid1 = {new Punkt(3, 8), new Punkt(5, 8), new Punkt(9, 2), new Punkt(3, 6)};
+    Punkt[] deltoid2 = {new Punkt(3, 2), new Punkt(1, 7), new Punkt(6, 5), new Punkt(6, 2)};
+    Punkt[] allg1 = {new Punkt(2, 3), new Punkt(3, 5), new Punkt(1, 6), new Punkt(4, 3)};
+    Punkt[] allg2 = {new Punkt(3, 4), new Punkt(1, 5), new Punkt(3, 9), new Punkt(4, 3)};
+    Punkt[] punkt = {new Punkt(0, 0), new Punkt(0, 0), new Punkt(0, 0), new Punkt(0, 0)};
+    Punkt[] strich = {new Punkt(0, 0), new Punkt(0, 0), new Punkt(2, 2), new Punkt(2, 2)};
+    Punkt[] dreieck = {new Punkt(0, 0), new Punkt(0, 0), new Punkt(2, 2), new Punkt(2, 0)};
+    Punkt[][] arr = {quadrat1, quadrat2, rechteck1, rechteck2, pg1, pg2, raute1, raute2, deltoid1, deltoid2, allg1, allg2};
 
     @Test
     public void testIsViereck() {
         assertFalse(Viereckbestimmung.isViereck(punkt));
         assertFalse(Viereckbestimmung.isViereck(strich));
         assertFalse(Viereckbestimmung.isViereck(dreieck));
-        for (Punkt[] p : arr) {
+        for (int i = 0; i < arr.length; i++) {
+            Punkt[] p = arr[i];
+            System.out.println(i);
             assertTrue(Viereckbestimmung.isViereck(p));
         }
     }
@@ -47,7 +50,9 @@ public class ViereckbestimmungTest {
         assertFalse(Viereckbestimmung.isQuadrat(punkt));
         assertFalse(Viereckbestimmung.isQuadrat(strich));
         assertFalse(Viereckbestimmung.isQuadrat(dreieck));
-        for (Punkt[] p : arr) {
+        for (int i = 0; i < arr.length; i++) {
+            Punkt[] p = arr[i];
+            System.out.println("TestQuadrat: " + i);
             if (p == quadrat1 || p == quadrat2) {
                 assertTrue(Viereckbestimmung.isQuadrat(p));
             } else {
@@ -103,7 +108,9 @@ public class ViereckbestimmungTest {
         assertFalse(Viereckbestimmung.isDeltoid(punkt));
         assertFalse(Viereckbestimmung.isDeltoid(strich));
         assertFalse(Viereckbestimmung.isDeltoid(dreieck));
-        for (Punkt[] p : arr) {
+        for (int i = 0; i < arr.length; i++) {
+            Punkt[] p = arr[i];
+            System.out.println("TestDeltoid: " + i);
             if (p == rechteck1 || p == rechteck2 || p == pg1 || p == pg2 || p == allg1 || p == allg2) {
                 assertFalse(Viereckbestimmung.isDeltoid(p));
             } else {
